@@ -1,4 +1,17 @@
-<?php include('../functions.php'); ?>
+<?php
+include('../functions.php');
+
+if (!isAdmin()) {
+	$_SESSION['msg'] = "로그인이 필요합니다.";
+	header('location: ../login.php');
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: ../login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
