@@ -122,16 +122,10 @@ if (isset($_GET['logout'])) {
   header("location: login.php");
 }
 
-if (!isLoggedIn()) {
-  $_SESSION['msg'] = "로그인이 필요합니다.";
-  header('location: login.php');
-}
-
-
-function isAdmin(){
-  if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin'){
-    return true;
-  }else{
-    return false;
-  }
+function isLoggedIn(){
+	if (isset($_SESSION['user'])) {
+		return true;
+	}else{
+		return false;
+	}
 }

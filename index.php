@@ -1,8 +1,14 @@
-<?php include('functions.php'); ?>
+<?php
+include('functions.php');
+if (!isLoggedIn()) {
+  	$_SESSION['msg'] = "로그인이 필요합니다.";
+  	header('location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>Index</title>
 </head>
 <body>
 <h2>쿠폰 사용 페이지</h2>
