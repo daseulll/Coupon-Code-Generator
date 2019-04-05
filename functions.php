@@ -81,3 +81,43 @@ function display_error() {
 			}
 	}
 }
+
+// 로그인버튼 누르면 로그인 함수가 호출
+if (isset($_POST['login_btn'])) {
+    login();
+}
+
+// 로그인 함수
+function login() {
+  global $mysqli, $username, $errors;
+
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $password = md5($password);
+  $query = "SELECT * FROM user_info WHERE username='$username' AND password='$password'";
+  $results = mysqli_query($mysqli, $query);
+
+  if (mysqli_num_rows($results) == 1) {
+    $logged_in_user = mysqli_fetch_assoc($results);
+    // admin 유저일 경우 admin.php로 이동
+    if ($logged_in_user['user_type'] == 'admin') {
+      $_SESSION['user'] = $logged_in_user;
+      $_SESSION['success'] = "로그인 되었습니다.";
+      header('location: admin/admin.php');
+    }elseif ($logged_in_user['user_type'] == 'user') {
+    // 일반 user일 경우 index.php로 이동
+      $_SESSION['user'] = $logged_in_user;
+      $_SESSION['success'] = "로그인 되었습니다.";
+      header('location: index.php');
+    }
+  }else{git
+    array_push($errors, "올바른 회원정보를 입력해주세요.");
+  }
+}
+
+// logout클릭 시 세션 삭제 후 로그아웃
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['user']);
+  header("location: login.php");
+}
