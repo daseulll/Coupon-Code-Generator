@@ -35,5 +35,12 @@ if (!isAdmin()) {
 
 	<?php endif ?>
 
+  <h3 style="color: #479daa;">쿠폰 코드 발행</h3>
+  <button type="submit" class="coupon_btn" name="coupon_btn">쿠폰코드발행</button>
+  <?php
+    echo generateCouponCode();
+    echo $coupon;
+   ?>
+
 </body>
 </html>

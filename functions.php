@@ -137,3 +137,19 @@ function isAdmin(){
     return false;
   }
 }
+
+if (isset($_POST['coupon_btn'])) {
+    $coupon = generateCouponCode();
+}
+
+function generateCouponCode($length = 13) {
+  $chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $ret = 'C01';
+  for($i = 0; $i < $length; ++$i) {
+    $random = str_shuffle($chars);
+    $ret .= $random[0];
+  }
+  return $ret;
+}
+
+?>
