@@ -110,7 +110,7 @@ function login() {
       $_SESSION['success'] = "로그인 되었습니다.";
       header('location: index.php');
     }
-  }else{git
+  }else{
     array_push($errors, "올바른 회원정보를 입력해주세요.");
   }
 }
